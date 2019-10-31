@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  publisherapi:
+    image: publisherapi
+    build:
+      context: .
+      dockerfile: Publisher.API/Dockerfile
+
+  consumerapi:
+    image: consumerapi
+    build:
+      context: .
+      dockerfile: Consumer.API/Dockerfile
