@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AspNetCore.MassTransit;
+using Common;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Publisher.API.Controllers
@@ -10,10 +12,22 @@ namespace Publisher.API.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private readonly IMassTransitRequest<Request> _massTransitRequest;
+        public ValuesController(IMassTransitRequest<Request> massTransitRequest)
+        {
+            _massTransitRequest = massTransitRequest;
+        }
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
+
+            _massTransitRequest.Send(new Request()
+            {
+                TestMessage = "Date time" + DateTime.Now
+
+            }).GetAwaiter().GetResult();
+
             return new string[] { "value1", "value2" };
         }
 

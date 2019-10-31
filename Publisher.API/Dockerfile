@@ -5,7 +5,7 @@ EXPOSE 443
 
 FROM microsoft/dotnet:2.2-sdk-stretch AS build
 WORKDIR /src
-COPY ["Publisher.API.csproj", "/"]
+COPY Publisher.API.csproj ./
 RUN dotnet restore "Publisher.API.csproj"
 COPY . .
 WORKDIR "/src"

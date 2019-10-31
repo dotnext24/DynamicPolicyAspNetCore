@@ -5,8 +5,8 @@ EXPOSE 443
 
 FROM microsoft/dotnet:2.2-sdk-stretch AS build
 WORKDIR /src
-COPY ["Consumer.API.csproj", "/"]
-RUN dotnet restore "HelloDockerTools/Consumer.API.csproj"
+COPY Consumer.API.csproj ./
+RUN dotnet restore "Consumer.API.csproj"
 COPY . .
 WORKDIR "/src"
 RUN dotnet build "Consumer.API.csproj" -c Release -o /app
