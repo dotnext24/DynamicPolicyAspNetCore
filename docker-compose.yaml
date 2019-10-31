@@ -6,12 +6,12 @@ services:
     ports:
       - "5001:80"
     build:
-      context: .
+      context: ./Publisher.API
       dockerfile: Publisher.API/Dockerfile
   consumerapi:
     image: consumerapi
     ports:
       - "5002:80"
     build:
-      context: .
+      context: ./Consumer.API
       dockerfile: Consumer.API/Dockerfile
