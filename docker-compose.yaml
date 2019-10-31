@@ -3,16 +3,18 @@ version: '3.4'
 services:
   publisherapi:
     image: publisherapi
+    ports:
+      - "5001:80"
     build:
       context: .
       dockerfile: Publisher.API/Dockerfile
-	  ports:
-        - "5001:80"
+	  
 
   consumerapi:
     image: consumerapi
+    ports:
+      - "5002:80"
     build:
       context: .
       dockerfile: Consumer.API/Dockerfile
-	  ports:
-        - "5002:80"
+	
