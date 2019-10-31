@@ -15,4 +15,3 @@ services:
     build:
       context: .
       dockerfile: Consumer.API/Dockerfile
-	
