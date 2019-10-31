@@ -7,8 +7,6 @@ WORKDIR /src
 COPY ./Publisher.API/Publisher.API.csproj .
 RUN dotnet restore "Publisher.API.csproj"
 COPY . .
-WORKDIR "/src"
-RUN dotnet build "Publisher.API.csproj" -c Release -o /app
 
 FROM build AS publish
 RUN dotnet publish "Publisher.API.csproj" -c Release -o /app
