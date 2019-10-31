@@ -8,8 +8,6 @@ services:
     build:
       context: .
       dockerfile: Publisher.API/Dockerfile
-	  
-
   consumerapi:
     image: consumerapi
     ports:
