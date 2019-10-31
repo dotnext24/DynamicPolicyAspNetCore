@@ -1,17 +1,14 @@
-﻿FROM microsoft/dotnet:2.2-aspnetcore-runtime-stretch-slim AS base
+﻿
+FROM microsoft/dotnet:2.2-sdk-stretch AS build
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
-FROM microsoft/dotnet:2.2-sdk-stretch AS build
-WORKDIR /src
-COPY ./Publisher.API/Publisher.API.csproj .
-RUN dotnet restore "Publisher.API.csproj"
+COPY ./*.csproj .
+RUN dotnet restore 
 COPY . .
+RUN dotnet publish  -c Release -o /dist
 
-FROM build AS publish
-RUN dotnet publish "Publisher.API.csproj" -c Release -o /app
-
-FROM base AS final
+FROM microsoft/dotnet:2.2-aspnetcore-runtime-stretch-slim
 WORKDIR /app
-COPY --from=publish /app .
+COPY --from=build /dist .
 ENTRYPOINT ["dotnet", "Publisher.API.dll"]
